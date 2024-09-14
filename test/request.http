@@ -1,0 +1,18 @@
+POST http://localhost:3001/api/auth/login HTTP/1.1
+content-type: application/json
+
+{
+    "username": "admin",
+    "password": "123456"
+}
+
+###
+
+# get profile, private
+GET http://localhost:3001/api/profile HTTP/1.1
+
+###
+
+# get books, public
+GET http://localhost:3001/api/books HTTP/1.1
+

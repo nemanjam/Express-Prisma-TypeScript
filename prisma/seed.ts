@@ -1,18 +1,20 @@
 import { hashPassword } from './../src/utils/bcryptHandler';
 import { TAuthorWrite, TBookWrite, TUserRegisterWrite } from '../src/types/general';
 import { db } from '../src/utils/db.server';
-import bcrypt from 'bcryptjs';
 import { v4 as uuidv4 } from 'uuid';
 
+const username = 'admin';
+const email = 'admin@email.com';
+const password = '123456';
+
 async function getUser(): Promise<TUserRegisterWrite> {
-  const password = 'admin';
   const hashedPassword = await hashPassword(password);
   return {
     id: uuidv4(),
     fullName: 'john doe',
-    username: 'admin',
+    username,
     password: hashedPassword,
-    email: 'email@company.com',
+    email,
   };
 }
 

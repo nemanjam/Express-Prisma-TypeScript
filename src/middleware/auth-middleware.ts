@@ -6,6 +6,9 @@ import { verifyToken } from '../utils/jwtHandler';
 const protectAuth = async (request: Request, response: Response, next: NextFunction) => {
   const allCookies = request.cookies;
   const token = allCookies.jwt;
+
+  console.log('allCookies', allCookies);
+
   if (token) {
     try {
       const decoded = verifyToken(token);

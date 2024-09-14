@@ -8,16 +8,18 @@ import profileRouter from './routes/profile.router';
 import { notFoundHandler } from './middleware/not-found';
 import { errorHandler } from './middleware/error-handler';
 import cookieParser from 'cookie-parser';
+import { NextFunction, Request, Response } from 'express';
 
 dotenv.config();
 
 const PORT: number = parseInt(process.env.PORT as string, 10);
+const ORIGIN = process.env.ORIGIN as string;
 
 const app = express();
 
 // CORS Middleware
 const corsOptions = {
-  origin: process.env.APP_ENV == 'developement' ? '*' : process.env.ORIGIN,
+  origin: ORIGIN,
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
   optionsSuccessStatus: 204,
@@ -29,6 +31,11 @@ app.use(express.urlencoded({ extended: true }));
 
 // cookie parser middleware
 app.use(cookieParser());
+
+// test
+app.use('/123', (request: Request, response: Response, next: NextFunction) => {
+  return response.status(200).json({ success: true, data: 'Hello world' });
+});
 
 // Main Routes
 app.use('/api/auth', authRouter);
@@ -43,5 +50,5 @@ app.use(notFoundHandler);
 app.use(errorHandler);
 
 app.listen(PORT, () => {
-  console.log(`Listening on PORT ${PORT}`);
+  console.log(`Listening on ORIGIN: ${ORIGIN}`);
 });
