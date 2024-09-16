@@ -32,16 +32,16 @@ app.use(express.urlencoded({ extended: true }));
 // cookie parser middleware
 app.use(cookieParser());
 
-// test
-app.use('/123', (request: Request, response: Response, next: NextFunction) => {
-  return response.status(200).json({ success: true, data: 'Hello world' });
-});
-
 // Main Routes
 app.use('/api/auth', authRouter);
 app.use('/api/profile', profileRouter);
 app.use('/api/authors', authorRouter);
 app.use('/api/books', bookRouter);
+
+// test
+app.use('/', (request: Request, response: Response, next: NextFunction) => {
+  return response.status(200).json({ success: true, data: 'fallback Hello world' });
+});
 
 // Not Found Middleware
 app.use(notFoundHandler);
