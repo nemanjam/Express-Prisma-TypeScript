@@ -1,3 +1,4 @@
+# login
 POST http://localhost:3001/api/auth/login HTTP/1.1
 content-type: application/json
 
@@ -15,4 +16,34 @@ GET http://localhost:3001/api/profile HTTP/1.1
 
 # get books, public
 GET http://localhost:3001/api/books HTTP/1.1
+###
+
+# get book by id, public
+GET http://localhost:3001/api/books/1 HTTP/1.1
+
+###
+
+# create book, private
+POST http://localhost:3001/api/books HTTP/1.1
+content-type: application/json
+
+{
+    "title": "My Book 1",
+    "authorId": 2,
+    "datePublished": "2023-09-14T06:45:30.187Z",
+    "isFiction": false
+}
+
+###
+
+# update book, private
+PUT http://localhost:3001/api/books/1 HTTP/1.1
+content-type: application/json
+
+{
+    "title": "Updated Book 1",
+    "authorId": 2,
+    "datePublished": "2023-09-14T06:45:30.187Z",
+    "isFiction": false
+}
 
